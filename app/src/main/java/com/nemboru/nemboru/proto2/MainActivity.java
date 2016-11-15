@@ -1,5 +1,7 @@
 package com.nemboru.nemboru.proto2;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -61,7 +63,11 @@ public class MainActivity extends AppCompatActivity
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO
+
+                Intent i = new Intent(MainActivity.this,detail.class);
+                i.putExtra("pair",a.arrayData.get(position));
+                startActivity(i);
+                overridePendingTransition(R.anim.left_right_2,R.anim.right_left_2);
             }
         });
     }
