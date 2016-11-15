@@ -28,7 +28,8 @@ public class alphaAdaptor extends ArrayAdapter<Pair> {
         super(c,-1,a);
         this.c = c;
         this.list = a;
-        this.lastLetter = new String();
+        this.lastLetter = new String(" ");
+
     }
 
     public String checkLast(String title){
@@ -51,6 +52,9 @@ public class alphaAdaptor extends ArrayAdapter<Pair> {
         TextView title = (TextView) rowView.findViewById(R.id.headerText);
 
         header.setText(checkLast(p.title));
+        if(position == 0 || header.getText().toString().compareTo(" ") == 0){
+            rowView.findViewById(R.id.divider).setVisibility(View.GONE);
+        }
         title.setText(p.title);
 
         return rowView;

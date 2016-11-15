@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        android:id="@+id/divider"
+        android:alpha="0.12"
+        android:layout_marginLeft="72dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -12,21 +21,29 @@
 
         <TextView
             android:text="A"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/headerlist"
-            android:layout_weight="0.06"
+            android:fontFamily="sans-serif-light"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_marginLeft="15dp" />
+            android:paddingLeft="16dp"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:layout_width="50dp" />
 
         <TextView
             android:text="Paypal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:fontFamily="regular"
+            android:layout_height="48dp"
             android:id="@+id/headerText"
             android:layout_weight="0.20"
-            android:layout_marginEnd="20dp"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+            android:textColor="@color/colorPrimary"
+            android:paddingLeft="22dp"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:textSize="16sp" />
 
     </LinearLayout>
+
 </LinearLayout>
