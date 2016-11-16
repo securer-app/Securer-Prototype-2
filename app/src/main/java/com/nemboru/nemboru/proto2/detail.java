@@ -19,6 +19,17 @@ import android.widget.TextView;
 
 public class detail extends AppCompatActivity {
 
+    protected TextView user;
+    protected TextView pass;
+    protected ImageView status;
+    protected ImageView userimage;
+    protected ImageView passimage;
+    protected View content;
+    protected Button b;
+
+    protected boolean decrypted;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,55 +37,65 @@ public class detail extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final TextView user = (TextView) findViewById(R.id.user);
-        final TextView pass = (TextView) findViewById(R.id.pass);
+        user = (TextView) findViewById(R.id.user);
+        pass = (TextView) findViewById(R.id.pass);
         Pair p = getIntent().getParcelableExtra("pair");
+
+        decrypted = false;
 
         user.setText(p.user);
         pass.setText(p.pass);
 
-        final ImageView status = (ImageView) findViewById(R.id.status);
-        final ImageView userimage = (ImageView) findViewById(R.id.userimage);
-        final ImageView passimage = (ImageView) findViewById(R.id.passimage);
+        status = (ImageView) findViewById(R.id.status);
+        userimage = (ImageView) findViewById(R.id.userimage);
+        passimage = (ImageView) findViewById(R.id.passimage);
+        content = findViewById(R.id.content);
 
 
-        Button b = (Button) findViewById(R.id.decrypt);
+        b = (Button) findViewById(R.id.decrypt);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // previously invisible view
-                final View myView = findViewById(R.id.content);
-                //myView.setVisibility(View.INVISIBLE);
-// get the center for the clipping circle
-                int cx = myView.getWidth() / 2;
-                int cy = myView.getHeight() / 2;
+                if (!decrypted) {
+                    decrypted = true;
+                    // previously invisible view
 
-// get the final radius for the clipping circle
-                float finalRadius = (float) Math.hypot(cx, cy);
+                    //myView.setVisibility(View.INVISIBLE);
+                    // get the center for the clipping circle
+                    int cx = content.getWidth() / 2;
+                    int cy = content.getHeight() / 2;
 
-// create the animator for this view (the start radius is zero)
-                Animator anim =
-                        ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
+                    // get the final radius for the clipping circle
+                    float finalRadius = (float) Math.hypot(cx, cy);
 
-// make the view visible and start the animation
+                    // create the animator for this view (the start radius is zero)
+                    Animator anim =
+                            ViewAnimationUtils.createCircularReveal(content, cx, cy, 0, finalRadius);
 
-                anim.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-                        myView.setBackgroundColor(Color.WHITE);
-                        status.setImageResource(R.drawable.ic_lock_open_black_24dp);
-                        status.setColorFilter(getResources().getColor(R.color.colorPrimary));
-                        userimage.setColorFilter(getResources().getColor(R.color.colorAccent));
-                        passimage.setColorFilter(getResources().getColor(R.color.colorAccent));
-                        user.setTextColor(getResources().getColor(R.color.colorPrimary));
-                        pass.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    }
-                });
+                    // make the view visible and start the animation
 
-                myView.setBackgroundColor(Color.BLACK);
-                myView.setVisibility(View.VISIBLE);
-                anim.setDuration(300);
-                anim.start();
+                    anim.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            content.setBackgroundColor(Color.WHITE);
+                            status.setImageResource(R.drawable.ic_lock_open_black_24dp);
+                            status.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                            userimage.setColorFilter(getResources().getColor(R.color.colorAccent));
+                            passimage.setColorFilter(getResources().getColor(R.color.colorAccent));
+                            user.setTextColor(getResources().getColor(R.color.colorPrimary));
+                            pass.setTextColor(getResources().getColor(R.color.colorPrimary));
+                            b.setText("Back");
+                        }
+                    });
+
+                    //content.setBackgroundColor(Color.BLACK);
+                    content.setVisibility(View.VISIBLE);
+                    anim.setDuration(300);
+                    anim.start();
+                } else {
+                    finish();
+                    overridePendingTransition(R.anim.left_right,R.anim.rigth_left);
+                }
             }
         });
     }

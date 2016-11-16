@@ -95,7 +95,8 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/password_master" />
+                android:id="@+id/password_master"
+                android:textColor="@android:color/white" />
 
             <Button
                 android:text="Decrypt"
@@ -103,7 +104,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/decrypt"
                 android:background="@color/colorAccent"
-                android:textColor="@color/text" />
+                android:textColor="@color/text"
+                android:elevation="2dp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
