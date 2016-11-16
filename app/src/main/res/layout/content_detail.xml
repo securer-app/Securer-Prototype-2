@@ -17,14 +17,15 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/container">
 
         <ImageView
             android:layout_width="match_parent"
             app:srcCompat="@drawable/ic_lock_black_24dp"
-            android:id="@+id/imageView5"
+            android:id="@+id/status"
             android:layout_height="159dp"
-            android:tint="@color/colorAccent" />
+            android:tint="@color/text" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -36,10 +37,10 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_person_black_24dp"
-                android:id="@+id/imageView4"
+                android:id="@+id/userimage"
                 android:layout_weight="0"
                 android:paddingLeft="16dp"
-                android:tint="@color/colorAccent" />
+                android:tint="@color/text" />
 
             <TextView
                 android:text="TextView"
@@ -49,7 +50,8 @@
                 android:fontFamily="sans-serif"
                 android:id="@+id/user"
                 android:layout_weight="1"
-                android:paddingLeft="22dp" />
+                android:paddingLeft="22dp"
+                android:textColor="@color/text" />
 
         </LinearLayout>
 
@@ -63,10 +65,10 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_vpn_key_black_24dp"
-                android:id="@+id/imageView3"
+                android:id="@+id/passimage"
                 android:layout_weight="0"
                 android:paddingLeft="16dp"
-                android:tint="@color/colorAccent" />
+                android:tint="@color/text" />
 
             <TextView
                 android:text="TextView"
@@ -76,7 +78,8 @@
                 android:textSize="16dp"
                 android:id="@+id/pass"
                 android:layout_weight="1"
-                android:paddingLeft="22dp" />
+                android:paddingLeft="22dp"
+                android:textColor="@color/text" />
 
         </LinearLayout>
 
@@ -92,13 +95,13 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText" />
+                android:id="@+id/password_master" />
 
             <Button
                 android:text="Decrypt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
+                android:id="@+id/decrypt"
                 android:background="@color/colorAccent"
                 android:textColor="@color/text" />
         </LinearLayout>

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.nemboru.nemboru.proto2.detail">
+    tools:context="com.nemboru.nemboru.proto2.detail"
+    android:background="@color/colorPrimary">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,6 +23,6 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_detail"
-        android:id="@+id/include" />
+        android:id="@+id/content" />
 
 </android.support.design.widget.CoordinatorLayout>
