@@ -77,7 +77,7 @@ public class detail extends AppCompatActivity {
                     anim.addListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationStart(Animator animation) {
-                            content.setBackgroundColor(Color.WHITE);
+                            content.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
                             status.setImageResource(R.drawable.ic_lock_open_black_24dp);
                             status.setColorFilter(getResources().getColor(R.color.colorPrimary));
                             userimage.setColorFilter(getResources().getColor(R.color.colorAccent));

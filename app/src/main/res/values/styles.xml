@@ -12,8 +12,6 @@
         <item name="android:windowActivityTransitions">true</item>
 
 
-
-
     </style>
 
     <style name="AppTheme.NoActionBar">
