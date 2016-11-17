@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class detail extends AppCompatActivity {
     protected ImageView status;
     protected ImageView userimage;
     protected ImageView passimage;
+    protected EditText masterpass;
     protected View content;
     protected Button b;
 
@@ -50,6 +52,7 @@ public class detail extends AppCompatActivity {
         userimage = (ImageView) findViewById(R.id.userimage);
         passimage = (ImageView) findViewById(R.id.passimage);
         content = findViewById(R.id.content);
+        masterpass = (EditText) findViewById(R.id.password_master);
 
 
         b = (Button) findViewById(R.id.decrypt);
@@ -79,12 +82,13 @@ public class detail extends AppCompatActivity {
                         public void onAnimationStart(Animator animation) {
                             content.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
                             status.setImageResource(R.drawable.ic_lock_open_black_24dp);
-                            status.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                            status.setColorFilter(getResources().getColor(R.color.colorAccent));
                             userimage.setColorFilter(getResources().getColor(R.color.colorAccent));
                             passimage.setColorFilter(getResources().getColor(R.color.colorAccent));
                             user.setTextColor(getResources().getColor(R.color.colorPrimary));
                             pass.setTextColor(getResources().getColor(R.color.colorPrimary));
                             b.setText("Back");
+                            masterpass.setVisibility(View.GONE);
                         }
                     });
 
@@ -98,6 +102,12 @@ public class detail extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.left_right,R.anim.rigth_left);
     }
 
 }

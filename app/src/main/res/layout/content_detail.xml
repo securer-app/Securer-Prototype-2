@@ -24,8 +24,8 @@
             android:layout_width="match_parent"
             app:srcCompat="@drawable/ic_lock_black_24dp"
             android:id="@+id/status"
-            android:layout_height="159dp"
-            android:tint="@color/text" />
+            android:tint="@color/text"
+            android:layout_height="160dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -51,7 +51,9 @@
                 android:id="@+id/user"
                 android:layout_weight="1"
                 android:paddingLeft="22dp"
-                android:textColor="@color/text" />
+                android:textColor="@color/text"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
 
         </LinearLayout>
 
@@ -79,7 +81,9 @@
                 android:id="@+id/pass"
                 android:layout_weight="1"
                 android:paddingLeft="22dp"
-                android:textColor="@color/text" />
+                android:textColor="@color/text"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
 
         </LinearLayout>
 

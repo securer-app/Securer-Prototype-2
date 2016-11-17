@@ -18,6 +18,10 @@
         <activity
             android:name=".detail"
             android:label="@string/title_activity_detail"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".producer"
+            android:label="@string/title_activity_producer"
             android:theme="@style/AppTheme"></activity>
     </application>
 
