@@ -1,7 +1,9 @@
 package com.nemboru.nemboru.proto2;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -134,6 +136,22 @@ public class MainActivity extends AppCompatActivity
                 a.addPair((Pair) data.getParcelableExtra("pair"));
             }
         }
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("data",a.dump());
+        editor.commit();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        a.load(sharedPref.getString("data","[]"));
     }
 
 }

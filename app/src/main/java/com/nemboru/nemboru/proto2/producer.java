@@ -85,7 +85,7 @@ public class producer extends AppCompatActivity {
         String pass = masterPass.getText().toString();
         toret.user = AESWrapper.Encrypt(pass,produceruser.getText().toString());
         toret.pass = AESWrapper.Encrypt(pass,producerpass.getText().toString());
-        toret.title = produceruser.getText().toString();
+        toret.title = producerLabel.getText().toString();
         return toret;
     }
 
@@ -143,8 +143,6 @@ public class producer extends AppCompatActivity {
                             setSeekbarAndIcon();
                         }
                     });
-
-                    p.title = producerLabel.getText().toString();
 
                     anim.setDuration(300);
                     anim.start();

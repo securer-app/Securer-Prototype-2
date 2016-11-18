@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by nemboru on 14/11/16.
@@ -69,6 +70,7 @@ public class alphaAdaptor extends ArrayAdapter<Pair> {
                 return o1.title.compareTo(o2.title);
             }
         });
+        setNotifyOnChange(true);
         super.notifyDataSetChanged();
     }
 }
