@@ -22,45 +22,59 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            app:srcCompat="@drawable/ic_vpn_key_black_24dp"
+            app:srcCompat="@drawable/ic_person_black_24dp"
             android:id="@+id/producer_status"
             android:tint="@color/colorAccent" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <ViewStub
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/key_producer"
+            android:id="@+id/key_producer"
+            android:layout_weight="1" />
+
+        <ViewStub
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/keyproduce_producer"
+            android:id="@+id/userkey_producer"
+            android:layout_weight="1" />
+
+        <ViewStub
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/success_producer"
+            android:id="@+id/success_producer" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/size_container">
+            android:gravity="center"
+            android:id="@+id/label_container">
 
-            <TextView
-                android:text="Size"
-                android:textSize="16dp"
-                android:fontFamily="sans-serif"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView2"
-                android:paddingRight="16dp"
-                android:paddingLeft="16dp"
-                android:textColor="@color/colorPrimary" />
+                app:srcCompat="@drawable/ic_label_black_24dp"
+                android:id="@+id/imageView4"
+                android:tint="@color/colorAccent" />
 
-            <TextView
-                android:text="4 letters"
-                android:layout_width="95dp"
-                android:textSize="16dp"
-                android:fontFamily="sans-serif"
+            <EditText
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/seekbar_info"
-                android:textColor="@color/colorAccent" />
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/producer_label"
+                android:hint="Label"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginRight="16dp" />
         </LinearLayout>
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -74,7 +88,6 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_person_black_24dp"
                 android:id="@+id/imageView3"
-                android:layout_weight="1"
                 android:tint="@color/colorAccent" />
 
             <EditText
@@ -85,34 +98,9 @@
                 android:id="@+id/producer_user"
                 android:hint="User"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:layout_marginRight="16dp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/pass_container">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_vpn_key_black_24dp"
-                android:id="@+id/imageView4"
-                android:layout_weight="1"
-                android:tint="@color/colorAccent" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/producer_pass"
-                android:hint="Password"
-                android:layout_weight="1"
-                android:textColor="@color/colorPrimary" />
         </LinearLayout>
 
     </LinearLayout>
@@ -123,39 +111,9 @@
         android:layout_height="match_parent"
         android:gravity="bottom">
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:visibility="invisible"
-            android:id="@+id/success"
-            android:paddingBottom="60dp">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_done_black_24dp"
-                android:id="@+id/imageView2"
-                android:tint="@color/text" />
-
-            <TextView
-                android:text="Credentials Sucefully ciphered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView3"
-                android:textColor="@color/text" />
-
-        </LinearLayout>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/master_pass"
-            android:hint="Master Key"
-            android:inputType="text"
-            android:textColor="@color/colorPrimary" />
+            android:layout_height="15dp" />
 
         <Button
             android:text="Create"

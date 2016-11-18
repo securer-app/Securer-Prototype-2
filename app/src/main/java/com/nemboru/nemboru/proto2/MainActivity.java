@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity
     protected ListView l;
     protected AlphabeticList a;
 
+    public static int PRODUCER_CODE = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,producer.class));
+                startActivityForResult(new Intent(MainActivity.this,producer.class),MainActivity.PRODUCER_CODE);
                 overridePendingTransition(R.anim.left_right,R.anim.rigth_left);
             }
         });
@@ -51,14 +54,6 @@ public class MainActivity extends AppCompatActivity
         l = (ListView) findViewById(R.id.list);
 
         a = new AlphabeticList(this,l);
-        a.addPair(new Pair("Github Nemo","Troll","12345"));
-        a.addPair(new Pair("Github Securer","Paypal","12345"));
-        a.addPair(new Pair("Unix PC","Github","12345"));
-
-        a.addPair(new Pair("Unix laptop","Parente","12345"));
-        a.addPair(new Pair("Paypal","Parente","12345"));
-        a.addPair(new Pair("Gmail","Parente","12345"));
-        a.addPair(new Pair("PostgreSQL","Parente","12345"));
 
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -127,6 +122,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("avtivity result","");
+        if (requestCode == PRODUCER_CODE) {
+            Log.d("avtivity result",Integer.toString(requestCode));
+            if (resultCode == RESULT_OK) {
+                Log.d("avtivity ok",Integer.toString(resultCode));
+                a.addPair((Pair) data.getParcelableExtra("pair"));
+            }
+        }
     }
 
 }

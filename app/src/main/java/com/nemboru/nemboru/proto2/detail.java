@@ -18,6 +18,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.security.InvalidKeyException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+
 public class detail extends AppCompatActivity {
 
     protected TextView user;
@@ -28,6 +33,8 @@ public class detail extends AppCompatActivity {
     protected EditText masterpass;
     protected View content;
     protected Button b;
+    protected Pair p;
+    protected Snackbar wrong_pass;
 
     protected boolean decrypted;
 
@@ -41,7 +48,7 @@ public class detail extends AppCompatActivity {
 
         user = (TextView) findViewById(R.id.user);
         pass = (TextView) findViewById(R.id.pass);
-        Pair p = getIntent().getParcelableExtra("pair");
+        p = getIntent().getParcelableExtra("pair");
 
         decrypted = false;
 
@@ -54,48 +61,64 @@ public class detail extends AppCompatActivity {
         content = findViewById(R.id.content);
         masterpass = (EditText) findViewById(R.id.password_master);
 
+        wrong_pass = Snackbar.make(findViewById(android.R.id.content),"Invalid password",Snackbar.LENGTH_SHORT);
+
 
         b = (Button) findViewById(R.id.decrypt);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!decrypted) {
-                    decrypted = true;
-                    // previously invisible view
+                    try {
+                        String master = masterpass.getText().toString();
+                        final String de_user = AESWrapper.Decrypt(master,p.user);
+                        final String de_pass = AESWrapper.Decrypt(master,p.pass);
 
-                    //myView.setVisibility(View.INVISIBLE);
-                    // get the center for the clipping circle
-                    int cx = content.getWidth() / 2;
-                    int cy = content.getHeight() / 2;
+                        decrypted = true;
+                        // previously invisible view
 
-                    // get the final radius for the clipping circle
-                    float finalRadius = (float) Math.hypot(cx, cy);
+                        //myView.setVisibility(View.INVISIBLE);
+                        // get the center for the clipping circle
+                        int cx = content.getWidth() / 2;
+                        int cy = content.getHeight() / 2;
 
-                    // create the animator for this view (the start radius is zero)
-                    Animator anim =
-                            ViewAnimationUtils.createCircularReveal(content, cx, cy, 0, finalRadius);
+                        // get the final radius for the clipping circle
+                        float finalRadius = (float) Math.hypot(cx, cy);
 
-                    // make the view visible and start the animation
+                        // create the animator for this view (the start radius is zero)
+                        Animator anim =
+                                ViewAnimationUtils.createCircularReveal(content, cx, cy, 0, finalRadius);
 
-                    anim.addListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-                            content.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
-                            status.setImageResource(R.drawable.ic_lock_open_black_24dp);
-                            status.setColorFilter(getResources().getColor(R.color.colorAccent));
-                            userimage.setColorFilter(getResources().getColor(R.color.colorAccent));
-                            passimage.setColorFilter(getResources().getColor(R.color.colorAccent));
-                            user.setTextColor(getResources().getColor(R.color.colorPrimary));
-                            pass.setTextColor(getResources().getColor(R.color.colorPrimary));
-                            b.setText("Back");
-                            masterpass.setVisibility(View.GONE);
-                        }
-                    });
+                        // make the view visible and start the animation
 
-                    //content.setBackgroundColor(Color.BLACK);
-                    content.setVisibility(View.VISIBLE);
-                    anim.setDuration(300);
-                    anim.start();
+                        anim.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationStart(Animator animation) {
+                                content.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
+                                status.setImageResource(R.drawable.ic_lock_open_black_24dp);
+                                status.setColorFilter(getResources().getColor(R.color.colorAccent));
+                                userimage.setColorFilter(getResources().getColor(R.color.colorAccent));
+                                passimage.setColorFilter(getResources().getColor(R.color.colorAccent));
+                                user.setTextColor(getResources().getColor(R.color.colorPrimary));
+                                pass.setTextColor(getResources().getColor(R.color.colorPrimary));
+                                b.setText("Back");
+                                user.setText(de_user);
+                                pass.setText(de_pass);
+                                masterpass.setVisibility(View.GONE);
+                            }
+                        });
+
+                        //content.setBackgroundColor(Color.BLACK);
+                        content.setVisibility(View.VISIBLE);
+                        anim.setDuration(300);
+                        anim.start();
+                    } catch (BadPaddingException e) {
+                        wrong_pass.show();
+                    } catch (IllegalBlockSizeException e) {
+                        wrong_pass.show();
+                    } catch (InvalidKeyException e) {
+                        wrong_pass.show();
+                    }
                 } else {
                     finish();
                     overridePendingTransition(R.anim.left_right,R.anim.rigth_left);
