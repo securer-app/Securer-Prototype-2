@@ -70,7 +70,7 @@ public class alphaAdaptor extends ArrayAdapter<Pair> {
                 return o1.title.compareTo(o2.title);
             }
         });
-        setNotifyOnChange(true);
+        //setNotifyOnChange(true);
         super.notifyDataSetChanged();
     }
 }

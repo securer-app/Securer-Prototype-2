@@ -47,11 +47,12 @@ public class AlphabeticList {
 
     public void load(String s){
         Log.d("readed",s);
-        this.arrayData.clear();
-        Pair[] t = g.fromJson(s,Pair[].class);
-        for(Pair p:t){
-            this.addPair(p);
+        if(arrayData.isEmpty()) {
+            Pair[] t = g.fromJson(s, Pair[].class);
+            for (Pair p : t) {
+                this.addPair(p);
+            }
+            this.adapter.notifyDataSetChanged();
         }
-        this.adapter.notifyDataSetChanged();
     }
 }

@@ -27,6 +27,10 @@
             android:tint="@color/text"
             android:layout_height="160dp" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -100,7 +104,10 @@
                 android:inputType="textPassword"
                 android:ems="10"
                 android:id="@+id/password_master"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:hint="Master password"
+                android:textColorHint="@color/text"
+                android:textCursorDrawable="@color/colorAccent" />
 
             <Button
                 android:text="Decrypt"

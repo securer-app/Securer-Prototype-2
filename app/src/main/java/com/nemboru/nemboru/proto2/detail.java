@@ -63,7 +63,7 @@ public class detail extends AppCompatActivity {
 
         wrong_pass = Snackbar.make(findViewById(android.R.id.content),"Invalid password",Snackbar.LENGTH_SHORT);
 
-
+        masterpass.requestFocus();
         b = (Button) findViewById(R.id.decrypt);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
