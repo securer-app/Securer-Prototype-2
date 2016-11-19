@@ -1,12 +1,16 @@
 package com.nemboru.nemboru.proto2;
 
 import android.app.ActivityOptions;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -67,6 +71,31 @@ public class MainActivity extends AppCompatActivity
                 overridePendingTransition(R.anim.left_right_2,R.anim.right_left_2);
             }
         });
+
+        l.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
+                b.setMessage("Do you want to delete this item?");
+                b.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //
+                    }
+                });
+
+                b.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        a.remove(position);
+                    }
+                });
+
+                b.show();
+                return true;
+            }
+        });
     }
 
     @Override
@@ -106,6 +135,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
+        if(id == R.id.new_navbar){
+            startActivityForResult(new Intent(MainActivity.this,producer.class),MainActivity.PRODUCER_CODE);
+            overridePendingTransition(R.anim.left_right,R.anim.rigth_left);
+        }else if(id == R.id.nav_website){
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://securer-app.github.io/"));
+            MainActivity.this.startActivity(i);
+        }else if(id == R.id.faq){
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://securer-app.github.io/faq/"));
+            MainActivity.this.startActivity(i);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

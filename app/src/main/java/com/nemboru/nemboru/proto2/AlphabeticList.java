@@ -55,4 +55,9 @@ public class AlphabeticList {
             this.adapter.notifyDataSetChanged();
         }
     }
+
+    public void remove(int position){
+        this.arrayData.remove(position);
+        this.adapter.notifyDataSetChanged();
+    }
 }

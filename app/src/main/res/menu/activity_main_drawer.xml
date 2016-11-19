@@ -7,11 +7,11 @@
             android:icon="@drawable/ic_add_black_24dp"
             android:title="New pass" />
         <item
-            android:id="@+id/faq"
+            android:id="@+id/nav_website"
             android:icon="@drawable/ic_public_black_24dp"
             android:title="Website" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/faq"
             android:icon="@drawable/ic_help_outline_black_24dp"
             android:title="FAQ" />
     </group>
