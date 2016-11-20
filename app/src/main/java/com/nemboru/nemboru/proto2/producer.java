@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewStub;
@@ -86,7 +87,8 @@ public class producer extends AppCompatActivity {
         toret.user = AESWrapper.Encrypt(pass,produceruser.getText().toString());
         toret.pass = AESWrapper.Encrypt(pass,producerpass.getText().toString());
         toret.title = producerLabel.getText().toString();
-        toret.title = toret.title.substring(0,1).toUpperCase() + p.title.substring(1,p.title.length());
+        //Log.d("label",t);
+        toret.title = toret.title.substring(0,1).toUpperCase() + toret.title.substring(1,toret.title.length());
         return toret;
     }
 

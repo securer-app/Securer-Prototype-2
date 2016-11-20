@@ -19,7 +19,6 @@ import java.util.List;
  * Created by nemboru on 14/11/16.
  */
 
-@SuppressWarnings("Since15")
 public class AlphabeticList {
     ListView list;
     ArrayList<Pair> arrayData;
@@ -36,8 +35,8 @@ public class AlphabeticList {
     }
 
     public void addPair(Pair p){
-        this.arrayData.add(p);
-        this.adapter.notifyDataSetChanged();
+        arrayData.add(p);
+        adapter.notifyDataSetChanged();
     }
 
     public String dump(){

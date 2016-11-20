@@ -11,7 +11,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.nemboru.nemboru.proto2.producer"
-    tools:showIn="@layout/activity_producer">
+    tools:showIn="@layout/activity_producer"
+    android:background="@drawable/testproducer"
+    android:backgroundTint="@color/colorPrimary"
+    android:backgroundTintMode="multiply">
 
     <LinearLayout
         android:orientation="vertical"
@@ -24,7 +27,7 @@
             android:layout_height="160dp"
             app:srcCompat="@drawable/ic_person_black_24dp"
             android:id="@+id/producer_status"
-            android:tint="@color/colorAccent" />
+            android:tint="@color/text" />
 
         <Space
             android:layout_width="match_parent"
@@ -62,7 +65,7 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_label_black_24dp"
                 android:id="@+id/imageView4"
-                android:tint="@color/colorAccent" />
+                android:tint="@color/text" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -72,8 +75,10 @@
                 android:id="@+id/producer_label"
                 android:hint="Label"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginRight="16dp" />
+                android:textColor="@color/text"
+                android:layout_marginRight="16dp"
+                android:backgroundTint="@color/text"
+                android:textColorHint="@color/text" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +93,7 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_person_black_24dp"
                 android:id="@+id/imageView3"
-                android:tint="@color/colorAccent" />
+                android:tint="@color/text" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -98,8 +103,10 @@
                 android:id="@+id/producer_user"
                 android:hint="User"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginRight="16dp" />
+                android:textColor="@color/text"
+                android:layout_marginRight="16dp"
+                android:backgroundTint="@color/text"
+                android:textColorHint="@color/text" />
 
         </LinearLayout>
 
@@ -111,10 +118,6 @@
         android:layout_height="match_parent"
         android:gravity="bottom">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="15dp" />
-
         <Button
             android:text="Create"
             android:layout_width="match_parent"
@@ -123,6 +126,10 @@
             android:elevation="2dp"
             android:background="@color/colorAccent"
             android:textColor="@color/text" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
     </LinearLayout>
 </RelativeLayout>

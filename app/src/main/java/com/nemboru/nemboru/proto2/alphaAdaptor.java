@@ -63,6 +63,7 @@ public class alphaAdaptor extends ArrayAdapter<Pair> {
 
     @Override
     public void notifyDataSetChanged(){
+        this.lastLetter = new String(" ");
         setNotifyOnChange(false);
         Collections.sort(this.list, new Comparator<Pair>() {
             @Override

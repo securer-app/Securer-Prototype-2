@@ -20,7 +20,7 @@
                 android:id="@+id/textView2"
                 android:paddingRight="16dp"
                 android:paddingLeft="16dp"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/text" />
 
             <TextView
                 android:text="4 letters"
@@ -29,13 +29,14 @@
                 android:fontFamily="sans-serif"
                 android:layout_height="wrap_content"
                 android:id="@+id/seekbar_info"
-                android:textColor="@color/colorAccent" />
+                android:textColor="@color/text" />
         </LinearLayout>
 
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/seekBar" />
+            android:id="@+id/seekBar"
+            android:backgroundTint="@color/text" />
 
         <Space
             android:layout_width="match_parent"
@@ -53,7 +54,8 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_vpn_key_black_24dp"
                 android:id="@+id/imageView4"
-                android:tint="@color/colorAccent" />
+                android:tint="@color/text"
+                android:backgroundTint="@color/text" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -63,7 +65,9 @@
                 android:id="@+id/producer_pass"
                 android:hint="Password"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimary"
-                android:layout_marginRight="16dp" />
+                android:textColor="@color/text"
+                android:layout_marginRight="16dp"
+                android:backgroundTint="@color/text"
+                android:textColorHint="@color/text" />
         </LinearLayout>
 </LinearLayout>

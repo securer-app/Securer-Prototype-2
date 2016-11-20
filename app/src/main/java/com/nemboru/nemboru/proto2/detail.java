@@ -94,13 +94,13 @@ public class detail extends AppCompatActivity {
                         anim.addListener(new AnimatorListenerAdapter() {
                             @Override
                             public void onAnimationStart(Animator animation) {
-                                content.setBackgroundColor(Color.parseColor("#FAFAFAFA"));
+                                //content.setBackground(getResources().getDrawable(R.drawable.testfree));
                                 status.setImageResource(R.drawable.ic_lock_open_black_24dp);
-                                status.setColorFilter(getResources().getColor(R.color.colorAccent));
-                                userimage.setColorFilter(getResources().getColor(R.color.colorAccent));
-                                passimage.setColorFilter(getResources().getColor(R.color.colorAccent));
-                                user.setTextColor(getResources().getColor(R.color.colorPrimary));
-                                pass.setTextColor(getResources().getColor(R.color.colorPrimary));
+                                //status.setColorFilter(getResources().getColor(R.color.colorAccent));
+                                //userimage.setColorFilter(getResources().getColor(R.color.colorAccent));
+                                //passimage.setColorFilter(getResources().getColor(R.color.colorAccent));
+                                //user.setTextColor(getResources().getColor(R.color.colorPrimary));
+                                //pass.setTextColor(getResources().getColor(R.color.colorPrimary));
                                 b.setText("Back");
                                 user.setText(de_user);
                                 pass.setText(de_pass);

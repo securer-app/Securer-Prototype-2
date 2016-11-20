@@ -11,7 +11,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.nemboru.nemboru.proto2.detail"
-    tools:showIn="@layout/activity_detail">
+    tools:showIn="@layout/activity_detail"
+    android:background="@drawable/testlock"
+    android:backgroundTint="@color/colorPrimary"
+    android:backgroundTintMode="multiply">
 
     <LinearLayout
         android:orientation="vertical"
@@ -91,23 +94,26 @@
 
         </LinearLayout>
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/password_master"
+            android:textColor="@android:color/white"
+            android:hint="Master password"
+            android:textColorHint="@color/text"
+            android:textCursorDrawable="@color/colorAccent"
+            android:layout_weight="0"
+            android:elegantTextHeight="true"
+            android:backgroundTint="@color/text" />
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0"
             android:gravity="bottom">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:id="@+id/password_master"
-                android:textColor="@android:color/white"
-                android:hint="Master password"
-                android:textColorHint="@color/text"
-                android:textCursorDrawable="@color/colorAccent" />
 
             <Button
                 android:text="Decrypt"
@@ -117,6 +123,10 @@
                 android:background="@color/colorAccent"
                 android:textColor="@color/text"
                 android:elevation="2dp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

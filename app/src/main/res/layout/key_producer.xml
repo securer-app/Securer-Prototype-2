@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vpn_key_black_24dp"
             android:id="@+id/imageView4"
-            android:tint="@color/colorAccent" />
+            android:tint="@color/text" />
 
         <EditText
             android:layout_width="match_parent"
@@ -28,7 +28,9 @@
             android:hint="Master Key"
             android:layout_weight="1"
             android:textColor="@color/colorPrimary"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"
+            android:backgroundTint="@color/text"
+            android:textColorHint="@color/text" />
 
     </LinearLayout>
 
@@ -44,7 +46,7 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vpn_key_black_24dp"
             android:id="@+id/imageView3"
-            android:tint="@color/colorAccent" />
+            android:tint="@color/text" />
 
         <EditText
             android:layout_width="match_parent"
@@ -54,8 +56,10 @@
             android:id="@+id/producer_master_2"
             android:hint="Repeat master key"
             android:layout_weight="1"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginRight="16dp" />
+            android:textColor="@color/text"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="@color/text"
+            android:textColorHint="@color/text" />
 
     </LinearLayout>
 
