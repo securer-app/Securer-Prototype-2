@@ -27,7 +27,7 @@
             android:id="@+id/producer_master"
             android:hint="Master Key"
             android:layout_weight="1"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/text"
             android:layout_marginRight="16dp"
             android:backgroundTint="@color/text"
             android:textColorHint="@color/text" />

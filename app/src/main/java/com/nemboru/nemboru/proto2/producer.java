@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewStub;
@@ -18,9 +17,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import java.util.Calendar;
-
-// TODO refactor
 public class producer extends AppCompatActivity {
 
     protected SeekBar seekbar;
@@ -39,12 +35,12 @@ public class producer extends AppCompatActivity {
     protected View label_container;
     protected Pair p;
 
+    protected emptyGuard guard;
+
     protected int state;
     protected Animator anim;
 
     protected boolean checkPasswords(){
-        masterPass = (EditText) findViewById(R.id.producer_master);
-        masterPass2 = (EditText) findViewById(R.id.producer_master_2);
         return masterPass.getText().toString().compareTo(masterPass2.getText().toString()) == 0;
     }
 
@@ -124,15 +120,14 @@ public class producer extends AppCompatActivity {
         producerLabel = (EditText) findViewById(R.id.producer_label);
         produceruser = (EditText) findViewById(R.id.producer_user);
 
-
-        /**/
-
-        /**/
+        guard = new emptyGuard();
+        guard.addGuard(producerLabel);
+        guard.addGuard(produceruser);
 
         btnproducer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (state == 0){
+                if (state == 0 && guard.check()){
 
                     newAnim(content);
                     anim.addListener(new AnimatorListenerAdapter() {
@@ -144,28 +139,32 @@ public class producer extends AppCompatActivity {
                             ViewStub t = (ViewStub) findViewById(R.id.userkey_producer);
                             t.inflate();
                             setSeekbarAndIcon();
+                            guard.addGuard(producerpass);
                         }
                     });
 
                     anim.setDuration(300);
                     anim.start();
                     state++;
-                }else if (state == 1){
+                }else if (state == 1 && guard.check()){
                     newAnim(content);
                     anim.addListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationStart(Animator animation) {
                             icon.setImageResource(R.drawable.ic_memory_black_24dp);
                             findViewById(R.id.keyproducer_producer).setVisibility(View.GONE);
-
                             ViewStub t = (ViewStub) findViewById(R.id.key_producer);
                             t.inflate();
+                            masterPass = (EditText) findViewById(R.id.producer_master);
+                            masterPass2 = (EditText) findViewById(R.id.producer_master_2);
+                            guard.addGuard(masterPass2);
+                            guard.addGuard(masterPass);
                         }
                     });
                     anim.setDuration(300);
                     anim.start();
                     state++;
-                }else if (state == 2) {
+                }else if (state == 2 && guard.check()) {
                     if(checkPasswords()) {
                         newAnim(content);
                         anim.addListener(new AnimatorListenerAdapter() {
@@ -184,6 +183,8 @@ public class producer extends AppCompatActivity {
                         anim.setDuration(300);
                         anim.start();
                         state++;
+                    }else{
+                        Snackbar.make(findViewById(android.R.id.content), "Passwords must match",Snackbar.LENGTH_SHORT).show();
                     }
                 }else if(state == 3){
                     setResult(RESULT_OK,new Intent().putExtra("pair",doCipher()));

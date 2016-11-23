@@ -14,6 +14,10 @@
             android:id="@+id/faq"
             android:icon="@drawable/ic_help_outline_black_24dp"
             android:title="FAQ" />
+        <item android:title="Import"
+            android:id="@+id/import_navbar" />
+        <item android:title="Export"
+            android:id="@+id/export_navbar" />
     </group>
 
 </menu>

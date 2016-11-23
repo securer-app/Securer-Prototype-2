@@ -40,12 +40,12 @@ public class AlphabeticList {
     }
 
     public String dump(){
-        Log.d("writed",g.toJson(arrayData));
+        //Log.d("writed",g.toJson(arrayData));
         return g.toJson(arrayData);
     }
 
     public void load(String s){
-        Log.d("readed",s);
+        //Log.d("readed",s);
         if(arrayData.isEmpty()) {
             Pair[] t = g.fromJson(s, Pair[].class);
             for (Pair p : t) {

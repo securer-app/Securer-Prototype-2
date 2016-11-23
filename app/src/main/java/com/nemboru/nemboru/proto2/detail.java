@@ -2,11 +2,7 @@ package com.nemboru.nemboru.proto2;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,7 +11,6 @@ import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.security.InvalidKeyException;
@@ -35,6 +30,8 @@ public class detail extends AppCompatActivity {
     protected Button b;
     protected Pair p;
     protected Snackbar wrong_pass;
+
+    protected emptyGuard guard;
 
     protected boolean decrypted;
 
@@ -63,16 +60,20 @@ public class detail extends AppCompatActivity {
 
         wrong_pass = Snackbar.make(findViewById(android.R.id.content),"Invalid password",Snackbar.LENGTH_SHORT);
 
+        guard = new emptyGuard();
+        guard.addGuard(masterpass);
+
         masterpass.requestFocus();
         b = (Button) findViewById(R.id.decrypt);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            if(guard.check()) {
                 if (!decrypted) {
                     try {
                         String master = masterpass.getText().toString();
-                        final String de_user = AESWrapper.Decrypt(master,p.user);
-                        final String de_pass = AESWrapper.Decrypt(master,p.pass);
+                        final String de_user = AESWrapper.Decrypt(master, p.user);
+                        final String de_pass = AESWrapper.Decrypt(master, p.pass);
 
                         decrypted = true;
                         // previously invisible view
@@ -94,13 +95,7 @@ public class detail extends AppCompatActivity {
                         anim.addListener(new AnimatorListenerAdapter() {
                             @Override
                             public void onAnimationStart(Animator animation) {
-                                //content.setBackground(getResources().getDrawable(R.drawable.testfree));
                                 status.setImageResource(R.drawable.ic_lock_open_black_24dp);
-                                //status.setColorFilter(getResources().getColor(R.color.colorAccent));
-                                //userimage.setColorFilter(getResources().getColor(R.color.colorAccent));
-                                //passimage.setColorFilter(getResources().getColor(R.color.colorAccent));
-                                //user.setTextColor(getResources().getColor(R.color.colorPrimary));
-                                //pass.setTextColor(getResources().getColor(R.color.colorPrimary));
                                 b.setText("Back");
                                 user.setText(de_user);
                                 pass.setText(de_pass);
@@ -121,8 +116,9 @@ public class detail extends AppCompatActivity {
                     }
                 } else {
                     finish();
-                    overridePendingTransition(R.anim.left_right,R.anim.rigth_left);
+                    overridePendingTransition(R.anim.left_right, R.anim.rigth_left);
                 }
+            }
             }
         });
     }

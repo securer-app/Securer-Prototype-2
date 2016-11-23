@@ -1,5 +1,6 @@
 package com.nemboru.nemboru.proto2;
 
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Context;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity
     protected AlphabeticList a;
 
     public static int PRODUCER_CODE = 2;
+    public static int PICKER_CODE = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +146,10 @@ public class MainActivity extends AppCompatActivity
         }else if(id == R.id.faq){
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://securer-app.github.io/faq/"));
             MainActivity.this.startActivity(i);
+        } else if(id == R.id.import_navbar){
+            IO.PickTextFile(this);
+        } else if(id == R.id.export_navbar){
+            IO.NewTextFile(this);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -153,7 +159,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("avtivity result","");
+
+        if (requestCode == IO.CREATOR_CODE && resultCode == Activity.RESULT_OK) {
+            IO.WriteStringToFile(this, a.dump(),data);
+        }
+        if (requestCode == IO.PICKER_CODE && resultCode == Activity.RESULT_OK) {
+            a.load(IO.ReadStringFromFile(this, data));
+        }
+
+
         if (requestCode == PRODUCER_CODE) {
             Log.d("avtivity result",Integer.toString(requestCode));
             if (resultCode == RESULT_OK) {
