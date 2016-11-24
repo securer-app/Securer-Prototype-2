@@ -133,6 +133,7 @@ public class producer extends AppCompatActivity {
                     anim.addListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationStart(Animator animation) {
+                            Snackbar.make(findViewById(android.R.id.content),"Touch the icon to generate a password",Snackbar.LENGTH_SHORT).show();
                             icon.setImageResource(R.drawable.ic_vpn_key_black_24dp);
                             label_container.setVisibility(View.GONE);
                             container_user.setVisibility(View.GONE);
@@ -176,7 +177,7 @@ public class producer extends AppCompatActivity {
                                 findViewById(R.id.key_producer).setVisibility(View.GONE);
                                 ViewStub t = (ViewStub) findViewById(R.id.success_producer);
                                 t.inflate();
-                                btnproducer.setText("Back");
+                                btnproducer.setText("Confirm");
                             }
                         });
 
@@ -193,9 +194,6 @@ public class producer extends AppCompatActivity {
                 }
             }
         });
-
-        Snackbar.make(findViewById(android.R.id.content),"Touch the key icon to generate a password",Snackbar.LENGTH_SHORT).show();
-
     }
 
     public void onBackPressed() {

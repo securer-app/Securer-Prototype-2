@@ -16,7 +16,6 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vpn_key_black_24dp"
-            android:id="@+id/imageView4"
             android:tint="@color/text" />
 
         <EditText
@@ -25,7 +24,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/producer_master"
-            android:hint="Master Key"
+            android:hint="Securer Key"
             android:layout_weight="1"
             android:textColor="@color/text"
             android:layout_marginRight="16dp"
@@ -45,7 +44,6 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_vpn_key_black_24dp"
-            android:id="@+id/imageView3"
             android:tint="@color/text" />
 
         <EditText
@@ -54,7 +52,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/producer_master_2"
-            android:hint="Repeat master key"
+            android:hint="Repeat securer key"
             android:layout_weight="1"
             android:textColor="@color/text"
             android:layout_marginRight="16dp"

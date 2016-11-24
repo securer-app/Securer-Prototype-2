@@ -1,17 +1,12 @@
 package com.nemboru.nemboru.proto2;
 
 import android.app.Activity;
-import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -25,7 +20,7 @@ public class IO {
 
     public static final void PickTextFile(Activity a){
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.setType("text/plain");
+        intent.setType("application/json");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         try {
             a.startActivityForResult(Intent.createChooser(intent, "Select a File to Import"),PICKER_CODE);
@@ -38,8 +33,8 @@ public class IO {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TITLE, "test");
+        intent.setType("application/json");
+        intent.putExtra(Intent.EXTRA_TITLE, "dump-"+System.currentTimeMillis()/1000); //epoch
         a.startActivityForResult(intent, CREATOR_CODE);
     }
 

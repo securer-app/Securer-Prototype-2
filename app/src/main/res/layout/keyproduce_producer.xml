@@ -8,8 +8,7 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/size_container">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:text="Size"
@@ -17,7 +16,6 @@
                 android:fontFamily="sans-serif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView2"
                 android:paddingRight="16dp"
                 android:paddingLeft="16dp"
                 android:textColor="@color/text" />
@@ -46,14 +44,12 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/pass_container">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_vpn_key_black_24dp"
-                android:id="@+id/imageView4"
                 android:tint="@color/text"
                 android:backgroundTint="@color/text" />
 
@@ -63,7 +59,7 @@
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/producer_pass"
-                android:hint="Password"
+                android:hint="Password to be encrypted"
                 android:layout_weight="1"
                 android:textColor="@color/text"
                 android:layout_marginRight="16dp"

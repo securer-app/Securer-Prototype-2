@@ -12,7 +12,7 @@ public class roll {
     public static final int specialsize;
 
     static {
-        x = "bcdfghjklmnpqrstvwxyz";
+        x = "bcdfghjklmnpqrstvwxyz1234567890BCDFGHJKLMNRSTVWXYZ";
         y = "aeiou";
         special = "!@#$%&--==/?;;[[]]";
         xsize = x.length();

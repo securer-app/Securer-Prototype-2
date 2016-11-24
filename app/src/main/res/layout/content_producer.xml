@@ -64,7 +64,6 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_label_black_24dp"
-                android:id="@+id/imageView4"
                 android:tint="@color/text" />
 
             <EditText
@@ -73,7 +72,7 @@
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/producer_label"
-                android:hint="Label"
+                android:hint="Name"
                 android:layout_weight="1"
                 android:textColor="@color/text"
                 android:layout_marginRight="16dp"
@@ -92,7 +91,6 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_person_black_24dp"
-                android:id="@+id/imageView3"
                 android:tint="@color/text" />
 
             <EditText
@@ -101,7 +99,7 @@
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/producer_user"
-                android:hint="User"
+                android:hint="Username to be encrypted"
                 android:layout_weight="1"
                 android:textColor="@color/text"
                 android:layout_marginRight="16dp"

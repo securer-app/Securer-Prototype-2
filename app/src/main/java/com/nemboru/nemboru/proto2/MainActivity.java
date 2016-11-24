@@ -1,8 +1,6 @@
 package com.nemboru.nemboru.proto2;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,18 +8,17 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -140,14 +137,27 @@ public class MainActivity extends AppCompatActivity
         if(id == R.id.new_navbar){
             startActivityForResult(new Intent(MainActivity.this,producer.class),MainActivity.PRODUCER_CODE);
             overridePendingTransition(R.anim.left_right,R.anim.rigth_left);
-        }else if(id == R.id.nav_website){
-            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://securer-app.github.io/"));
-            MainActivity.this.startActivity(i);
         }else if(id == R.id.faq){
-            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://securer-app.github.io/faq/"));
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://securer-app.github.io/faq.html"));
             MainActivity.this.startActivity(i);
         } else if(id == R.id.import_navbar){
-            IO.PickTextFile(this);
+
+            AlertDialog.Builder d = new AlertDialog.Builder(this);
+            d.setMessage("Importing a file will delete all current passwords");
+            d.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //
+                }
+            });
+            d.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    IO.PickTextFile(MainActivity.this);
+                }
+            });
+            d.show();
+
         } else if(id == R.id.export_navbar){
             IO.NewTextFile(this);
         }
@@ -164,6 +174,7 @@ public class MainActivity extends AppCompatActivity
             IO.WriteStringToFile(this, a.dump(),data);
         }
         if (requestCode == IO.PICKER_CODE && resultCode == Activity.RESULT_OK) {
+            a.arrayData.clear();
             a.load(IO.ReadStringFromFile(this, data));
         }
 
@@ -186,11 +197,33 @@ public class MainActivity extends AppCompatActivity
         editor.commit();
     }
 
+    protected void showEmptyDialog(){
+        AlertDialog.Builder d = new AlertDialog.Builder(this);
+        d.setMessage("Seems that you don't have any passwords saved");
+        d.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //
+            }
+        });
+        d.setPositiveButton("Add one", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivityForResult(new Intent(MainActivity.this,producer.class),MainActivity.PRODUCER_CODE);
+                overridePendingTransition(R.anim.left_right,R.anim.rigth_left);
+            }
+        });
+        d.show();
+    }
+
     @Override
     protected void onResume(){
         super.onResume();
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         a.load(sharedPref.getString("data","[]"));
+        if(a.arrayData.isEmpty()){
+            showEmptyDialog();
+        }
     }
 
 }

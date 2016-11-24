@@ -2,7 +2,6 @@ package com.nemboru.nemboru.proto2;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;

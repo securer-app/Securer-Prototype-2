@@ -1,12 +1,7 @@
 <resources>
-    <string name="app_name">Proto2</string>
-    <string name="title_activity_wqre">wqre</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_detail">detail</string>
-    <string name="title_activity_producer">producer</string>
 </resources>

@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -20,8 +19,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="1"
-        android:id="@+id/container">
+        android:weightSum="1">
 
         <ImageView
             android:layout_width="match_parent"
@@ -60,7 +58,12 @@
                 android:paddingLeft="22dp"
                 android:textColor="@color/text"
                 android:focusable="true"
-                android:focusableInTouchMode="true" />
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:elegantTextHeight="true"
+                android:textIsSelectable="true"
+                android:hapticFeedbackEnabled="true" />
+
 
         </LinearLayout>
 
@@ -90,7 +93,11 @@
                 android:paddingLeft="22dp"
                 android:textColor="@color/text"
                 android:focusable="true"
-                android:focusableInTouchMode="true" />
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:textIsSelectable="true"
+                android:hapticFeedbackEnabled="true"
+                android:elegantTextHeight="true" />
 
         </LinearLayout>
 
@@ -101,7 +108,7 @@
             android:ems="10"
             android:id="@+id/password_master"
             android:textColor="@android:color/white"
-            android:hint="Master password"
+            android:hint="Securer password"
             android:textColorHint="@color/text"
             android:textCursorDrawable="@color/colorAccent"
             android:layout_weight="0"
