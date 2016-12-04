@@ -83,7 +83,6 @@ public class producer extends AppCompatActivity {
         toret.user = AESWrapper.Encrypt(pass,produceruser.getText().toString());
         toret.pass = AESWrapper.Encrypt(pass,producerpass.getText().toString());
         toret.title = producerLabel.getText().toString();
-        //Log.d("label",t);
         toret.title = toret.title.substring(0,1).toUpperCase() + toret.title.substring(1,toret.title.length());
         return toret;
     }

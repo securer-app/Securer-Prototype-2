@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,12 +31,14 @@ public class MainActivity extends AppCompatActivity
 
     public static int PRODUCER_CODE = 2;
     public static int PICKER_CODE = 3;
+    public static int SIGIN = 324;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -95,6 +98,7 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
         });
+
     }
 
     @Override
@@ -120,11 +124,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -184,6 +183,13 @@ public class MainActivity extends AppCompatActivity
             if (resultCode == RESULT_OK) {
                 Log.d("avtivity ok",Integer.toString(resultCode));
                 a.addPair((Pair) data.getParcelableExtra("pair"));
+            }
+        }
+
+        if (requestCode == SIGIN) {
+            if (resultCode == RESULT_OK) {
+                // user is signed in!
+                Snackbar.make(findViewById(android.R.id.content),"Signed",Snackbar.LENGTH_SHORT);
             }
         }
     }

@@ -17,9 +17,7 @@ public class PasswordDerivation {
     public static byte[] derive(String key){
         Security.addProvider(new BouncyCastleProvider());
         try {
-            Log.d("DERIVING",key);
             byte[] toret = BCrypt.generate(key.getBytes("UTF-8"),"Securer Securer!".getBytes("UTF-8"),4);
-            Log.d("Derived", Base64.encodeToString(toret,Base64.DEFAULT));
             return toret;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

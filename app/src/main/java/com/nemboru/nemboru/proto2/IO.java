@@ -25,7 +25,6 @@ public class IO {
         try {
             a.startActivityForResult(Intent.createChooser(intent, "Select a File to Import"),PICKER_CODE);
         } catch (Exception ex) {
-            Log.d("error reading file",ex.toString());
         }
     }
 
@@ -34,7 +33,7 @@ public class IO {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         intent.setType("application/json");
-        intent.putExtra(Intent.EXTRA_TITLE, "dump-"+System.currentTimeMillis()/1000); //epoch
+        intent.putExtra(Intent.EXTRA_TITLE, "SecurerData-"+System.currentTimeMillis()/1000); //epoch
         a.startActivityForResult(intent, CREATOR_CODE);
     }
 
@@ -43,15 +42,11 @@ public class IO {
         Uri uri = null;
         if (resultData != null) {
             uri = resultData.getData();
-            Log.d("IOWRITED :", "Uri: " + uri.toString());
             PrintWriter out = null;
             try {
                 out = new PrintWriter(a.getContentResolver().openOutputStream(uri));
                 out.write(content);
-                Log.d("IOPrinted: ","d "+content);
-
             } catch (FileNotFoundException e) {
-                Log.d("IOError to file ",e.toString());
             }finally {
                 out.close();
             }
@@ -65,16 +60,13 @@ public class IO {
         Uri uri = null;
         if (resultData != null) {
             uri = resultData.getData();
-            Log.d("IOREADED :", "Uri: " + uri.toString());
             InputStream in = null;
             try {
                 in = a.getContentResolver().openInputStream(uri);
             } catch (FileNotFoundException e) {
-                Log.d("IOreading from file",e.toString());
             }
             Scanner s = new Scanner(in).useDelimiter("\\A");
             String result = s.hasNext() ? s.next() : "";
-            Log.d("IOR :" , "d  " +result);
             return result;
         }
 

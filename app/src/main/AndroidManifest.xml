@@ -4,25 +4,33 @@
 
     <application
         android:allowBackup="true"
+        android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Securer"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity
+            android:name=".detail"
+            android:label="Read"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".producer"
+            android:label="Create"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".sigin"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_sigin"
+            android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".detail"
-            android:label="Securer - read"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".producer"
-            android:label="Securer - create"
-            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
