@@ -8,7 +8,7 @@ import android.os.Parcelable;
  */
 
 public class Pair implements Parcelable {
-    public String header;
+    public String key;
     public String title;
     public String user;
     public String pass;
@@ -41,6 +41,7 @@ public class Pair implements Parcelable {
         title = new String();
         user = new String();
         pass = new String();
+        key = new String();
     }
 
     public Pair(String title, String user, String pass){
@@ -53,6 +54,5 @@ public class Pair implements Parcelable {
         this.title = p.readString();
         this.user = p.readString();
         this.pass = p.readString();
-
     }
 }

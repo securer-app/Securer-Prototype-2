@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity
                 b.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        a.remove(position);
+                        fireio.remove(position);
                     }
                 });
 

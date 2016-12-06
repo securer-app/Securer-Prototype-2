@@ -1,5 +1,7 @@
 package com.nemboru.nemboru.proto2;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +35,8 @@ public class FireIO {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Pair p = dataSnapshot.getValue(Pair.class);
+                p.key = dataSnapshot.getKey();
+                Log.d("listend ADDED",p.key);
                 list.addPair(p);
             }
 
@@ -43,7 +47,7 @@ public class FireIO {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                list.remove(dataSnapshot.getKey());
             }
 
             @Override
@@ -62,6 +66,11 @@ public class FireIO {
 
     public void add(Pair it){
         dbRef.push().setValue(it);
+    }
+
+    public void remove(int pos){
+        Pair p = list.arrayData.get(pos);
+        dbRef.child(p.key).removeValue();
     }
 
 }
