@@ -33,7 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
     Created by Nemo
  */
 
-public class sigin extends FragmentActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class sigin extends FragmentActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     public static String TAG = "SIGIN";
     public static int RC_SIGN_IN = 233;
@@ -48,7 +48,7 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
         setContentView(R.layout.activity_sigin);
 
         // custom logic here
-        
+
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -58,7 +58,9 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    startActivity(new Intent(sigin.this,MainActivity.class));
+                    Intent next = new Intent(sigin.this, MainActivity.class);
+                    next.putExtra("user",user.getUid());
+                    startActivity(next);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -70,13 +72,7 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
         SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
+        signInButton.setOnClickListener(this);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -149,5 +145,11 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d("SIGIN","connection failed.");
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 }
