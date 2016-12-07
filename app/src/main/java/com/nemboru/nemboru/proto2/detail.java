@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.security.InvalidKeyException;
 
 import javax.crypto.BadPaddingException;
@@ -32,6 +36,7 @@ public class detail extends AppCompatActivity {
     protected Snackbar wrong_pass;
 
     protected emptyGuard guard;
+    protected InterstitialAd mInterstitialAd;
 
     protected boolean decrypted;
 
@@ -115,18 +120,39 @@ public class detail extends AppCompatActivity {
                         wrong_pass.show();
                     }
                 } else {
-                    finish();
-                    overridePendingTransition(R.anim.left_right, R.anim.rigth_left);
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    } else {
+                        finish();
+                        overridePendingTransition(R.anim.left_right, R.anim.rigth_left);
+                    }
                 }
             }
             }
         });
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+                finish();
+                overridePendingTransition(R.anim.left_right, R.anim.rigth_left);
+            }
+        });
+        requestNewInterstitial();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.left_right,R.anim.rigth_left);
+    }
+
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mInterstitialAd.loadAd(adRequest);
     }
 
 }

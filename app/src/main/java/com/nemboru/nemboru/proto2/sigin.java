@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -84,6 +85,7 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-9828321328021898~8616005561");
     }
 
     @Override

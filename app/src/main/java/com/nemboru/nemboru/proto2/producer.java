@@ -17,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 public class producer extends AppCompatActivity {
 
     protected SeekBar seekbar;
@@ -39,6 +43,8 @@ public class producer extends AppCompatActivity {
 
     protected int state;
     protected Animator anim;
+
+    protected InterstitialAd mInterstitialAd;
 
     protected boolean checkPasswords(){
         return masterPass.getText().toString().compareTo(masterPass2.getText().toString()) == 0;
@@ -187,17 +193,38 @@ public class producer extends AppCompatActivity {
                         Snackbar.make(findViewById(android.R.id.content), "Passwords must match",Snackbar.LENGTH_SHORT).show();
                     }
                 }else if(state == 3){
-                    setResult(RESULT_OK,new Intent().putExtra("pair",doCipher()));
-                    finish();
-                    overridePendingTransition(R.anim.left_right_2,R.anim.right_left_2);
+                    if (mInterstitialAd.isLoaded()) {
+                        mInterstitialAd.show();
+                    } else {
+                        setResult(RESULT_OK, new Intent().putExtra("pair", doCipher()));
+                        finish();
+                        overridePendingTransition(R.anim.left_right_2, R.anim.right_left_2);
+                    }
                 }
             }
         });
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-9828321328021898/2569471960");
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitial();
+                setResult(RESULT_OK, new Intent().putExtra("pair", doCipher()));
+                finish();
+                overridePendingTransition(R.anim.left_right_2, R.anim.right_left_2);;
+            }
+        });
+        requestNewInterstitial();
     }
 
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.left_right_2,R.anim.right_left_2);
+    }
+
+    public void requestNewInterstitial(){
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mInterstitialAd.loadAd(adRequest);
     }
 
 }
