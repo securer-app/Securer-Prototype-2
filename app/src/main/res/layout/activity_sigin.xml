@@ -48,7 +48,7 @@
                 android:padding="10dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="0dp"
-                android:id="@+id/editText3"
+                android:id="@+id/emailsigin"
                 android:hint="Email" />
 
             <EditText
@@ -62,7 +62,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
                 android:ems="10"
-                android:id="@+id/editText2"
+                android:id="@+id/passwordsigin"
                 android:hint="Password" />
 
             <Button
@@ -74,7 +74,7 @@
                 android:padding="10dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
-                android:id="@+id/button2"
+                android:id="@+id/emailsigin"
                 android:background="@color/colorAccent"
                 android:textColor="@color/text" />
 

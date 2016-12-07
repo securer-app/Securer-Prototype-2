@@ -26,6 +26,7 @@ import android.widget.ListView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -135,6 +136,9 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if(item.getItemId() == R.id.Logout){
+            FirebaseAuth.getInstance().signOut();
+        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.MobileAds;
@@ -41,6 +43,8 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private EditText email;
+    private EditText pass;
     private GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -86,6 +90,12 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
                 .build();
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-9828321328021898~8616005561");
+
+        Button emailsigin = (Button) findViewById(R.id.emailsigin);
+        emailsigin.setOnClickListener(this);
+
+        email = (EditText) findViewById(R.id.emailsigin);
+        pass = (EditText) findViewById(R.id.passwordsigin);
     }
 
     @Override
@@ -151,7 +161,26 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
 
     @Override
     public void onClick(View v) {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        if(v.getId() == R.id.sign_in_button) {
+            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+            startActivityForResult(signInIntent, RC_SIGN_IN);
+        }else{
+            mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                            // If sign in fails, display a message to the user. If sign in succeeds
+                            // the auth state listener will be notified and logic to handle the
+                            // signed in user can be handled in the listener.
+                            if (!task.isSuccessful()) {
+                                // SNACKBAR
+                            }
+
+                            // ...
+                        }
+                    });
+        }
     }
 }
