@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         if(item.getItemId() == R.id.Logout){
             FirebaseAuth.getInstance().signOut();
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -165,9 +166,7 @@ public class MainActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == PRODUCER_CODE) {
-            Log.d("avtivity result",Integer.toString(requestCode));
             if (resultCode == RESULT_OK) {
-                Log.d("avtivity ok",Integer.toString(resultCode));
                 Pair p = data.getParcelableExtra("pair");
                 fireio.add(p);
             }

@@ -6,7 +6,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,13 +65,11 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     Intent next = new Intent(sigin.this, MainActivity.class);
                     next.putExtra("user",user.getUid());
                     startActivity(next);
                 } else {
                     // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
 
             }
@@ -91,11 +92,49 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
 
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-9828321328021898~8616005561");
 
-        Button emailsigin = (Button) findViewById(R.id.emailsigin);
+        Button emailsigin = (Button) findViewById(R.id.buttonsigin);
         emailsigin.setOnClickListener(this);
 
         email = (EditText) findViewById(R.id.emailsigin);
         pass = (EditText) findViewById(R.id.passwordsigin);
+
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
+                    email.setError("Not a valid email");
+                }
+            }
+        });
+
+        pass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(pass.getText().toString().length()<6){
+                    pass.setError("Password must be at least 6 characters long");
+                }
+            }
+        });
     }
 
     @Override
@@ -131,7 +170,6 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         // [START_EXCLUDE silent]
         // [END_EXCLUDE]
 
@@ -140,13 +178,11 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
                             Snackbar.make(findViewById(android.R.id.content), "Authentication failed.",
                                     Snackbar.LENGTH_SHORT).show();
                         }
@@ -156,7 +192,6 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d("SIGIN","connection failed.");
     }
 
     @Override
@@ -164,21 +199,27 @@ public class sigin extends FragmentActivity implements GoogleApiClient.OnConnect
         if(v.getId() == R.id.sign_in_button) {
             Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
             startActivityForResult(signInIntent, RC_SIGN_IN);
-        }else{
+        }else if(v.getId() == R.id.buttonsiginregister){
             mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-
+                        public void onComplete(@NonNull Task<AuthResult> task){
                             // If sign in fails, display a message to the user. If sign in succeeds
                             // the auth state listener will be notified and logic to handle the
                             // signed in user can be handled in the listener.
                             if (!task.isSuccessful()) {
-                                // SNACKBAR
+                                Snackbar.make(findViewById(android.R.id.content), "Register failed",Snackbar.LENGTH_SHORT).show();
                             }
-
-                            // ...
+                        }
+                    });
+        }else {
+            mAuth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(!task.isSuccessful()){
+                                Snackbar.make(findViewById(android.R.id.content), "Sign up failed",Snackbar.LENGTH_SHORT).show();
+                            }
                         }
                     });
         }

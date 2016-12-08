@@ -36,7 +36,6 @@ public class FireIO {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Pair p = dataSnapshot.getValue(Pair.class);
                 p.key = dataSnapshot.getKey();
-                Log.d("listend ADDED",p.key);
                 list.addPair(p);
             }
 
